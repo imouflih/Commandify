@@ -15,10 +15,17 @@ class Client(db.Model):
   tel = db.Column(db.String(100), nullable=False)
   facebook = db.Column(db.String(100))
   instagram = db.Column(db.String(100))
+  fidelite = db.Column(db.Integer)
+  
 
 class Commande(db.Model):
   n_commande = db.Column(db.Integer, primary_key=True)
   date_commande = db.Column(db.DateTime, nullable=False)
+  n_client = db.Column(db.Integer)
+  nom_client = db.Column(db.String(100), nullable=False)
+  Total = db.Column(db.Float, nullable=False)
+  Status = db.Column(db.String(100), nullable=False)
+  
 
 class Livraison(db.Model):
   n_livraison = db.Column(db.Integer, primary_key=True)
@@ -29,6 +36,9 @@ class Livraison(db.Model):
 class Product(db.Model):
   n_product = db.Column(db.Integer, primary_key=True)
   prix_unitaire = db.Column(db.Float, nullable=False)
+  name = db.Column(db.String(100))
+  prix_magazin = db.Column(db.Float, nullable=False)
+  status = db.Column(db.String(100), nullable=False)
 
 class Facture(db.Model):
   n_facture = db.Column(db.Integer, primary_key=True)
@@ -113,6 +123,53 @@ def get_client_details(n_client):
   client_data['facebook'] = client.facebook
   client_data['instagram'] = client.instagram
   return jsonify({'client': client_data})
+
+@app.route('/api/create_product', methods=['POST'])
+def create_product():
+  n_product = db.session.query(func.max(Product.n_product)).scalar()+1
+  data = request.get_json()
+  new_product = Product(
+    n_product=n_product,
+    prix_unitaire = data['prix_unitaire'],
+    name = data['name'],
+    prix_magazin = data['prix_magazin'],
+    status = data['status']
+  )
+  db.session.add(new_product)
+  db.session.commit()
+  return jsonify({'message': 'Nouveau produit'})
+
+
+@app.route('/api/product_list', methods=['GET'])
+def get_product_list():
+  Products = Product.query.all()
+  product_list = []
+  for product in Products:
+    product_data = {}
+    product_data['n_product'] = product.n_product
+    product_data['prix_unitaire'] = product.prix_unitaire
+    product_data['name'] = product.name
+    product_data['prix_magazin'] = product.prix_magazin
+    product_data['status'] = product.status
+    product_list.append(product_data)
+  return jsonify({'clients': product_list}) 
+
+
+@app.route('/api/modify_product/<int:n_product>', methods=['PUT'])
+def modify_product(n_product):
+  product = Product.query.get(n_product)
+  if not product:
+    return jsonify({'message': 'Aucun produit trouvé avec cet identifiant'})
+  data = request.get_json()
+  product.n_product = n_product
+  product.prix_unitaire = data['prix_unitaire']
+  product.name = data['name'],
+  product.prix_magazin = data['prix_magazin'],
+  product.status = data['status']
+  db.session.commit()
+  return jsonify({'message': 'Fiche client modifiée avec succès'})
+
+
 
 @app.route('/api/create_order', methods=['POST'])
 def create_order():
