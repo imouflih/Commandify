@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-lg-6 shadow p-4">
+            <h3>Créer votre compte</h3>
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Adresse mail</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Nous allons jamais partager vos informations personnelles.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName1">Nom</label>
+    <input type="text" class="form-control" id="exampleInputName1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPrenom1">Prénom</label>
+    <input type="text" class="form-control" id="exampleInputPrenom1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPhone1">Téléphone</label>
+    <input type="number" class="form-control" id="exampleInputPhone1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFacebook1">Facebook</label>
+    <input type="text" class="form-control" id="exampleInputFacebook1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputInstagram1">Instagram</label>
+    <input type="text" class="form-control" id="exampleInputInstagram1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Mot de passe</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        </div>
+    </div>
+</div>
+{% endblock %}

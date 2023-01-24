@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h3 class="mb-3">La liste des clients</h3>
+    <div class="row">
+        <table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Id client</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Adresse mail</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Facebook</th>
+      <th scope="col">Instagram</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Durem</td>
+      <td>Alexandre</td>
+      <td>Alexandre@example.com</td>
+      <td>0985050505</td>
+      <td>@Alexandre</td>
+      <td>@Alexandre</td>
+      <td><a href="#">Modifier</a></td>
+
+    </tr>
+  </tbody>
+</table>
+    </div>
+</div>
+
+{% endblock %}
