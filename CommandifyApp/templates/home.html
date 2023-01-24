@@ -18,17 +18,20 @@
     </tr>
   </thead>
   <tbody>
+    {% for e in clients %}
     <tr>
-      <th scope="row">1</th>
-      <td>Durem</td>
-      <td>Alexandre</td>
-      <td>Alexandre@example.com</td>
-      <td>0985050505</td>
-      <td>@Alexandre</td>
-      <td>@Alexandre</td>
-      <td><a href="#">Modifier</a></td>
-
+      <th scope="row">{{ e.idClient }}</th>
+      <td>{{ e.nom }}</td>
+      <td>{{ e.prenom }}</td>
+      <td>{{ e.mail }}</td>
+      <td>0{{ e.telephone }}</td>
+      <td>{{ e.facebook }}</td>
+      <td>{{ e.instagram }}</td>
+      <td><a href="{% url 'clientDetails' idClient=e.idClient %}">Modifier</a></td>
     </tr>
+    {% empty %}
+    <h3>Il n'y a pas de client pour l'instant</h3>
+    {% endfor %}
   </tbody>
 </table>
     </div>
