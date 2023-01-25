@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, func
 import pandas as pd
 import json
+import datetime
 import flask_excel as excel
 
 app = Flask(__name__)
@@ -113,6 +114,7 @@ def get_client_list():
     client_data['tel'] = client.tel
     client_data['facebook'] = client.facebook
     client_data['instagram'] = client.instagram
+    client_data['fidelite'] = client.fidelite
     clients_list.append(client_data)
   return jsonify({'clients': clients_list})
 
@@ -156,7 +158,11 @@ def get_client_details(n_client):
 
 @app.route('/api/create_product', methods=['POST'])
 def create_product():
-  n_product = db.session.query(func.max(Product.n_product)).scalar()+1
+  n_product = db.session.query(func.max(Product.n_product)).scalar()
+  if n_product is None:
+    n_product =  0
+  else:
+    n_product+=1
   data = request.get_json()
   new_product = Product(
     n_product=n_product,
@@ -228,16 +234,21 @@ def get_product_details(n_product):
 @app.route('/api/create_order', methods=['POST'])
 def create_order():
   data = request.get_json()
-  total=0
-  for i in data['products']:
-    product = Product.query.get(i)
-    total+=product.prix_magazin
+  n_commande = db.session.query(func.max(Commande.n_commande)).scalar()
+  if n_commande is None:
+    n_commande =  0
+  else:
+    n_commande+=1
+  total=data['total']
+  # for i in data['products']:
+  #   product = Product.query.get(i)
+  #   total+=product.prix_magazin
   client = Client.query.get(data['client_id'])
   client.fidelite = client.fidelite + total//10
   db.session.commit()
   new_order = Commande(
-    n_commande=data['n_commande'],
-    date_commande=data['date_commande'],
+    n_commande=n_commande,
+    date_commande=datetime.datetime.now,
     n_client = data['n_client'],
     nom_client = data['nom_client'],
     Total = total,
@@ -254,6 +265,11 @@ def modify_order(n_commande):
   if not order:
     return jsonify({'message': 'Aucune commande trouvée avec cet identifiant'})
   data = request.get_json()
+  order.n_commande=n_commande,
+  order.date_commande=datetime.datetime.now
+  order.n_client = data['n_client']
+  order.nom_client = data['nom_client']
+  order.Total = data['total']
   order.Status = data['status']
   db.session.commit()
   return jsonify({'message': 'Commande modifiée avec succès'})
