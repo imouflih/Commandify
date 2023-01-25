@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from sqlalchemy import create_engine, func
+import pandas as pd
+import json
+import flask_excel as excel
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///D:\WorkSpace\cosmetique_app\database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///D:\WorkSpace\sqlite-tools-win32-x86-3400100\sqlite-tools-win32-x86-3400100\database.db'
 db = SQLAlchemy(app)
 
 
@@ -54,7 +57,11 @@ class Stock(db.Model):
 
 @app.route('/api/create_client', methods=['POST'])
 def create_client():
-  n_client = db.session.query(func.max(Client.n_client)).scalar()+1
+  n_client = db.session.query(func.max(Client.n_client)).scalar()
+  if n_client is None:
+    n_client =  0
+  else:
+    n_client+=1
   data = request.get_json()
   new_client = Client(
     n_client=n_client,
@@ -108,6 +115,29 @@ def get_client_list():
     client_data['instagram'] = client.instagram
     clients_list.append(client_data)
   return jsonify({'clients': clients_list})
+
+@app.route('/api/client_list/to_excel', methods=['GET'])
+def client_to_excel():
+  clients = Client.query.all()
+  clients_list = []
+  for client in clients:
+    client_data = {}
+    client_data['n_client'] = client.n_client
+    client_data['nom_client'] = client.nom_client
+    client_data['add_postale'] = client.add_postale
+    client_data['add_email'] = client.add_email
+    client_data['tel'] = client.tel
+    client_data['facebook'] = client.facebook
+    client_data['instagram'] = client.instagram
+    clients_list.append(client_data)
+  # Convert JSON data to a DataFrame
+  df = pd.read_json(json.dumps({'clients': clients_list}))
+
+  # Write DataFrame to an Excel file
+  excel_file = df.to_excel("clients.xlsx", index=False)
+  return excel.make_response(excel_file,'xlsx')
+  return jsonify({'message': 'fichier genere'})
+    
 
 @app.route('/api/client_details/<int:n_client>', methods=['GET'])
 def get_client_details(n_client):
