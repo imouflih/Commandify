@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h3 class="mb-3">La liste des commandes</h3>
+    <div class="row">
+        <table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">n_commande</th>
+      <th scope="col">date_commande</th>
+      <th scope="col">n_client</th>
+      <th scope="col">nom_client</th>
+      <th scope="col">Total</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in commands %}
+    <tr>
+      <th scope="row">{{ e.n_commande }}</th>
+      <td>{{ e.date_commande }}</td>
+      <td>{{ e.n_client }}</td>
+      <td>{{ e.nom_client }}</td>
+      <td>0{{ e.Total }}</td>
+      <td>{{ e.Status }}</td>
+    </tr>
+    {% empty %}
+    <h3>Il n'y a pas de commandes pour l'instant</h3>
+    {% endfor %}
+  </tbody>
+</table>
+    </div>
+</div>
+
+{% endblock %}

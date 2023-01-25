@@ -5,8 +5,8 @@ from .views import *
 
 urlpatterns = [
     path('',home, name="home"),
-    path('login',login,name="login"),
-    path('register',register,name="register"),
-    path('client/<int:idClient>/',clientDetails,name="clientDetails"),
+    path('clientsList',clientsList,name="clientsList"),
+    path('commandsList',commandsList,name="commandsList"),
+    path('client/<int:n_client>/',clientDetails,name="clientDetails"),
 
 ]

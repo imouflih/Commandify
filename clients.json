@@ -1,0 +1,19 @@
+{"clients": [{"n_client": 1,
+              "nom_client": "Durem",
+              "add_postale": "Alexandre",
+              "add_email": "Alexandre@example.com",
+              "tel": 985050505,
+              "facebook": "@Alexandre",
+              "instagram": "@Alexandre",
+              "fidelite": 151
+            },
+             {"n_client": 2,
+              "nom_client": "Hamid",
+              "add_postale": "SimoVI",
+              "add_email": "SimoVI@example.com",
+              "tel": 985050505,
+              "facebook": "@SimoVI",
+              "instagram": "@SimoVI",
+              "fidelite": 151}
+            ]
+}

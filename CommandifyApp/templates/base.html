@@ -13,7 +13,11 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-dark shadow">
     <div class="container">
-      <a class="navbar-brand text-white" href="#">Commandify</a>
+      <a class="navbar-brand text-white" href="{% url 'home' %}">
+    <img src="https://zupimages.net/up/23/04/tf2g.png" width="30" height="30" alt="">
+        Commandify
+  </a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -30,10 +34,10 @@
         <a class="nav-link text-white" href="#" tabindex="-1" aria-disabled="true">A propos</a>
       </li>
       <li class="nav-item ml-5">
-        <a class="nav-link text-white btn btn-success" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Connexion</a>
+        <a class="nav-link text-white btn btn-info" href="{% url 'clientsList' %}" tabindex="-1" aria-disabled="true">Liste des clients</a>
       </li>
         <li class="nav-item ml-5">
-        <a class="nav-link text-white btn btn-info" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Créer un compte</a>
+        <a class="nav-link text-white btn btn-info" href="{% url 'commandsList' %}" tabindex="-1" aria-disabled="true">Liste des commandes</a>
       </li>
     </ul>
   </div>
