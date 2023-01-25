@@ -6,6 +6,8 @@ productFile_Path = "products.json"
 clientFile_Path = "clients.json"
 commandFile_Path = "commands.json"
 
+
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
