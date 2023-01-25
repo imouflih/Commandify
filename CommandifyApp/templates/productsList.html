@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h3 class="mb-3">La liste des produits</h3>
+    <div class="row">
+        <table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">numéro du product</th>
+      <th scope="col">nom du produit</th>
+      <th scope="col">prix unitaire</th>
+      <th scope="col">prix magazin</th>
+      <th scope="col">status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in products %}
+    <tr>
+      <th scope="row">{{ e.n_product }}</th>
+      <td>{{ e.name }}</td>
+      <td>{{ e.prix_unitaire }}</td>
+      <td>{{ e.prix_magasin }}</td>
+      <td>{{ e.status }}</td>
+      <td><a href="">Modifier</a></td>
+    </tr>
+    {% empty %}
+    <h3>Il n'y a pas de commandes pour l'instant</h3>
+    {% endfor %}
+  </tbody>
+</table>
+    </div>
+</div>
+
+{% endblock %}
