@@ -2,6 +2,16 @@ from django.contrib.sites import requests
 from django.shortcuts import render
 import json
 
+<<<<<<< HEAD
+=======
+#Paths
+productFile_Path = "products.json"
+clientFile_Path = "clients.json"
+commandFile_Path = "commands.json"
+
+
+
+>>>>>>> ac80349eec2749ce92fd9726ea05b5d784ff53a5
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
