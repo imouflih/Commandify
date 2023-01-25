@@ -152,7 +152,7 @@ def get_product_list():
     product_data['prix_magazin'] = product.prix_magazin
     product_data['status'] = product.status
     product_list.append(product_data)
-  return jsonify({'clients': product_list}) 
+  return jsonify({'products': product_list}) 
 
 
 @app.route('/api/modify_product/<int:n_product>', methods=['PUT'])
@@ -167,16 +167,52 @@ def modify_product(n_product):
   product.prix_magazin = data['prix_magazin'],
   product.status = data['status']
   db.session.commit()
-  return jsonify({'message': 'Fiche client modifiée avec succès'})
+  return jsonify({'message': 'Fiche produit modifiée avec succès'})
+
+
+@app.route('/api/delete_product/<int:n_product>', methods=['DELETE'])
+def delete_product(n_product):
+  product = Product.query.get(n_product)
+  if not product:
+    return jsonify({'message': 'Aucun produit trouvé avec cet identifiant'})
+  db.session.delete(product)
+  db.session.commit()
+  return jsonify({'message': 'Fiche produit supprimée avec succès'})
+
+
+@app.route('/api/product_details/<int:n_product>', methods=['GET'])
+def get_product_details(n_product):
+  product = Product.query.get(n_product)
+  if not product:
+    return jsonify({'message': 'Aucun produit trouvé avec cet identifiant'})
+  product_data = {}
+  product_data['n_product'] = product.n_product
+  product_data['prix_unitaire'] = product.prix_unitaire
+  product_data['name'] = product.name
+  product_data['prix_magazin'] = product.prix_magazin
+  product_data['status'] = product.status
+  return jsonify({'product': product_data})
 
 
 
 @app.route('/api/create_order', methods=['POST'])
 def create_order():
   data = request.get_json()
+  total=0
+  for i in data['products']:
+    product = Product.query.get(i)
+    total+=product.prix_magazin
+  client = Client.query.get(data['client_id'])
+  client.fidelite = client.fidelite + total//10
+  db.session.commit()
   new_order = Commande(
     n_commande=data['n_commande'],
-    date_commande=data['date_commande']
+    date_commande=data['date_commande'],
+    n_client = data['n_client'],
+    nom_client = data['nom_client'],
+    Total = total,
+    Status = data['status']
+    
   )
   db.session.add(new_order)
   db.session.commit()
@@ -188,7 +224,7 @@ def modify_order(n_commande):
   if not order:
     return jsonify({'message': 'Aucune commande trouvée avec cet identifiant'})
   data = request.get_json()
-  order.date_commande = data['date_commande']
+  order.Status = data['status']
   db.session.commit()
   return jsonify({'message': 'Commande modifiée avec succès'})
 
@@ -209,6 +245,10 @@ def get_order_list():
     order_data = {}
     order_data['n_commande'] = order.n_commande
     order_data['date_commande'] = order.date_commande
+    order_data['n_client'] = order.n_client
+    order_data['nom_client'] = order.nom_client
+    order_data['total'] = order.total
+    order_data['Status'] = order.Status
     orders_list.append(order_data)
   return jsonify({'orders': orders_list})
 
