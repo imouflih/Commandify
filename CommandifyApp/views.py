@@ -1,10 +1,6 @@
+from django.contrib.sites import requests
 from django.shortcuts import render
 import json
-
-#Paths
-productFile_Path = "products.json"
-clientFile_Path = "clients.json"
-commandFile_Path = "commands.json"
 
 # Create your views here.
 def home(request):
@@ -12,21 +8,15 @@ def home(request):
 
 
 def productsList(request):
-    return render(request, 'productsList.html')
+    data = requests.get('http://localhost:5000/api/product_list').json()
+    return render(request, 'productsList.html', data)
 
 def clientsList(request):
-    with open(clientFile_Path, 'r') as file:
-        data = json.load(file)
-    data = {"clients":data.get("clients", [])}
+    data = requests.get('http://localhost:5000/api/client_list').json()
     return render(request, 'clientsList.html',data)
 
 
 def commandsList(request):
-    with open(commandFile_Path, 'r') as file:
-        data = json.load(file)
-    data = {"commands":data.get("clients", [])}
+    data = requests.get('http://localhost:5000/api/order_list').json()
     return render(request, 'commandsList.html',data)
 
-
-def clientDetails(request):
-    return render(request, 'clientDetails.html')

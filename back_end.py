@@ -6,7 +6,7 @@ import json
 import flask_excel as excel
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///D:\WorkSpace\sqlite-tools-win32-x86-3400100\sqlite-tools-win32-x86-3400100\database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 
