@@ -1,69 +1,155 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-5 mb-5">
-    <h3 class="mb-3">La liste des produits</h3>
-  <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Ajouter un produit</button>
+  <h3 class="mb-3">La liste des produits</h3>
+  <button
+    type="button"
+    class="btn btn-primary mb-3"
+    data-toggle="modal"
+    data-target=".bd-example-modal-xl"
+  >
+    Ajouter un produit
+  </button>
 
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ajouter un produit</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-      </div>
-      <div class="modal-body">
-      <form>
-    <div class="form-group">
-    <label for="exampleInputName1">Nom du client</label>
-    <input type="text" class="form-control" id="exampleInputName1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputAdd1">Prix unitaire</label>
-    <input type="text" class="form-control" id="exampleInputAdd1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputPhone1">Prix magazin</label>
-    <input type="text" class="form-control" id="exampleInputPhone1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputFb1">Status</label>
-    <input type="text" class="form-control" id="exampleInputFb1">
-  </div>
-  <button type="submit" class="btn btn-primary">Ajouter les modifications</button>
-</form>
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            Ajouter un produit
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
         </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'ajoutProduit' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputName1">Nom du client</label>
+              <input type="text" class="form-control" id="exampleInputName1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputAdd1">Prix unitaire</label>
+              <input type="text" class="form-control" id="exampleInputAdd1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhone1">Prix magazin</label>
+              <input type="text" class="form-control" id="exampleInputPhone1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFb1">Status</label>
+              <input type="text" class="form-control" id="exampleInputFb1" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Ajouter les modifications
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered table-dark">
+      <thead>
+        <tr>
+          <th scope="col">numéro du product</th>
+          <th scope="col">nom du produit</th>
+          <th scope="col">prix unitaire</th>
+          <th scope="col">prix magazin</th>
+          <th scope="col">status</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in products %}
+        <tr>
+          <th scope="row">{{ e.n_product }}</th>
+          <td>{{ e.name }}</td>
+          <td>{{ e.prix_unitaire }}</td>
+          <td>{{ e.prix_magasin }}</td>
+          <td>{{ e.status }}</td>
+          <td><button
+    type="button"
+    class="btn btn-primary mb-3"
+    data-toggle="modal"
+    data-target=".bd-example-modal-xl"
+  >
+    Modifier
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdrop">
+            Modifier
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'modifProduit' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputNam1">Nom du client</label>
+              <input type="text" class="form-control" id="exampleInputNam1" value="{{ e.name }}"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputAd1">Prix unitaire</label>
+              <input type="text" class="form-control" id="exampleInputAd1" value="{{ e.prix_unitaire }}"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhon1">Prix magazin</label>
+              <input type="text" class="form-control" id="exampleInputPhon1" value="{{ e.prix_magasin }}"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputF1">Status</label>
+              <input type="text" class="form-control" id="exampleInputF1" value="{{ e.status }}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Ajouter les modifications
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    </div>
-    <div class="row">
-        <table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">numéro du product</th>
-      <th scope="col">nom du produit</th>
-      <th scope="col">prix unitaire</th>
-      <th scope="col">prix magazin</th>
-      <th scope="col">status</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for e in products %}
-    <tr>
-      <th scope="row">{{ e.n_product }}</th>
-      <td>{{ e.name }}</td>
-      <td>{{ e.prix_unitaire }}</td>
-      <td>{{ e.prix_magasin }}</td>
-      <td>{{ e.status }}</td>
-      <td><a href="">Modifier</a></td>
-    </tr>
-    {% empty %}
-    <h3>Il n'y a pas de commandes pour l'instant</h3>
-    {% endfor %}
-  </tbody>
-</table>
-    </div>
+  </div></td>
+          <td>
+          <button class="btn btn-primary" action="deleteProduit">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        {% empty %}
+        <h3>Il n'y a pas de commandes pour l'instant</h3>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}

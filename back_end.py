@@ -23,12 +23,12 @@ class Client(db.Model):
   
 
 class Commande(db.Model):
-  n_commande = db.Column(db.Integer, primary_key=True)
+  N_commande = db.Column(db.Integer, primary_key=True)
   date_commande = db.Column(db.DateTime, nullable=False)
   n_client = db.Column(db.Integer)
   nom_client = db.Column(db.String(100), nullable=False)
   Total = db.Column(db.Float, nullable=False)
-  Status = db.Column(db.String(100), nullable=False)
+  status = db.Column(db.String(100), nullable=False)
   
 
 class Livraison(db.Model):
@@ -42,7 +42,7 @@ class Product(db.Model):
   prix_unitaire = db.Column(db.Float, nullable=False)
   name = db.Column(db.String(100))
   prix_magazin = db.Column(db.Float, nullable=False)
-  status = db.Column(db.String(100), nullable=False)
+  statut = db.Column(db.String(100), nullable=False)
 
 class Facture(db.Model):
   n_facture = db.Column(db.Integer, primary_key=True)
@@ -186,7 +186,7 @@ def get_product_list():
     product_data['prix_unitaire'] = product.prix_unitaire
     product_data['name'] = product.name
     product_data['prix_magazin'] = product.prix_magazin
-    product_data['status'] = product.status
+    product_data['status'] = product.statut
     product_list.append(product_data)
   return jsonify({'products': product_list}) 
 
@@ -294,7 +294,7 @@ def get_order_list():
     order_data['n_client'] = order.n_client
     order_data['nom_client'] = order.nom_client
     order_data['total'] = order.total
-    order_data['Status'] = order.Status
+    order_data['Status'] = order.status
     orders_list.append(order_data)
   return jsonify({'orders': orders_list})
 

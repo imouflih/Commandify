@@ -1,83 +1,190 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-5 mb-5">
-    <h3 class="mb-3">La liste des clients</h3>
-    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target=".bd-example-modal-xl">Ajouter un client</button>
+  <h3 class="mb-3">La liste des clients</h3>
+  <button
+    type="button"
+    class="btn btn-primary mb-3"
+    data-toggle="modal"
+    data-target=".bd-example-modal-xl"
+  >
+    Ajouter un client
+  </button>
 
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ajouter un client</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-      </div>
-      <div class="modal-body">
-      <form>
-    <div class="form-group">
-    <label for="exampleInputName1">Nom du client</label>
-    <input type="text" class="form-control" id="exampleInputName1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputAdd1">Adresse</label>
-    <input type="text" class="form-control" id="exampleInputAdd1">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputPhone1">Téléphone</label>
-    <input type="text" class="form-control" id="exampleInputPhone1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputFb1">Facebook</label>
-    <input type="text" class="form-control" id="exampleInputFb1">
-  </div>
-    <div class="form-group">
-    <label for="exampleInputIg1">Instagram</label>
-    <input type="text" class="form-control" id="exampleInputIG1">
-  </div>
-  <button type="submit" class="btn btn-primary">Ajouter les modifications</button>
-</form>
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">
+            Ajouter un client
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
         </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'ajoutClient' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputName1">Nom du client</label>
+              <input type="text" class="form-control" id="exampleInputName1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputAdd1">Adresse</label>
+              <input type="text" class="form-control" id="exampleInputAdd1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhone1">Téléphone</label>
+              <input type="text" class="form-control" id="exampleInputPhone1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFb1">Facebook</label>
+              <input type="text" class="form-control" id="exampleInputFb1" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputIg1">Instagram</label>
+              <input type="text" class="form-control" id="exampleInputIG1" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Ajouter les modifications
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-    <div class="row">
-        <table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Numéro client</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Adresse</th>
-      <th scope="col">Email</th>
-      <th scope="col">Téléphone</th>
-      <th scope="col">Facebook</th>
-      <th scope="col">Instagram</th>
-      <th scope="col">Fidélité</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for e in clients %}
-    <tr>
-      <th scope="row">{{ e.n_client }}</th>
-      <td>{{ e.nom_client }}</td>
-      <td>{{ e.add_postale }}</td>
-      <td>{{ e.add_email }}</td>
-      <td>0{{ e.tel }}</td>
-      <td>{{ e.facebook }}</td>
-      <td>{{ e.instagram }}</td>
-      <td>{{ e.fidelite }}</td>
-      <td><a href="#">Modifier</a></td>
-    </tr>
-    {% empty %}
-    <h3>Il n'y a pas de client pour l'instant</h3>
-    {% endfor %}
-  </tbody>
-</table>
+  <div class="row">
+    <table class="table table-bordered table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Numéro client</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Email</th>
+          <th scope="col">Téléphone</th>
+          <th scope="col">Facebook</th>
+          <th scope="col">Instagram</th>
+          <th scope="col">Fidélité</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in clients %}
+        <tr>
+          <th scope="row">{{ e.n_client }}</th>
+          <td>{{ e.nom_client }}</td>
+          <td>{{ e.add_postale }}</td>
+          <td>{{ e.add_email }}</td>
+          <td>0{{ e.tel }}</td>
+          <td>{{ e.facebook }}</td>
+          <td>{{ e.instagram }}</td>
+          <td>{{ e.fidelite }}</td>
+          <td>
+            <button
+    type="button"
+    class="btn btn-primary mb-3"
+    data-toggle="modal"
+    data-target=".bd-example-modal-xl"
+  >
+    Modifier
+  </button>
+
+  <div
+    class="modal fade bd-example-modal-xl"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myExtraLargeModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdrop">
+            Modifier
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'modifClient' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputNam1">Nom du client</label>
+              <input type="text" class="form-control" id="exampleInputNam1" value="{{ e.nom_client }}" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputAd1">Adresse</label>
+              <input type="text" class="form-control" id="exampleInputAd1" value="{{ e.add_postale }}" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmai1">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmai1"
+                aria-describedby="emailHelp"
+                value="{{ e.add_email }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPhon1">Téléphone</label>
+              <input type="text" class="form-control" id="exampleInputPhon1" value="{{ e.tel }}"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputF1">Facebook</label>
+              <input type="text" class="form-control" id="exampleInputF1" value="{{ e.facebook }}"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputI1">Instagram</label>
+              <input type="text" class="form-control" id="exampleInputI1" value="{{ e.instagram }}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Ajouter les modifications
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+          </td>
+          <td>
+          <button class="btn btn-primary" action="deleteClient">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        {% empty %}
+        <h3>Il n'y a pas de client pour l'instant</h3>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 {% endblock %}

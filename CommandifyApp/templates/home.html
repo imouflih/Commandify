@@ -1,40 +1,52 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container mt-5 mb-5">
-    <img src="https://zupimages.net/up/23/04/3lpk.png" class="rounded mx-auto d-block">
+  <img
+    src="https://zupimages.net/up/23/04/3lpk.png"
+    class="rounded mx-auto d-block"
+  />
   <div class="row">
-<div class="card rounded mx-auto d-block mt-5">
-  <div class="card-header  bg-dark text-white">
-    Produits
-  </div>
-  <div class="card-body bg-secondary.bg-gradient">
-    <h5 class="card-title">Gérer vos produits en toute facilité</h5>
-    <p class="card-text">Avec notre interface intuitive, vous pourrez organiser votre base de données de produits et maximiser votre productivité en un rien de temps</p>
-    <a href="{% url 'productsList' %}" class="btn btn-info">Listes des produits</a>
-  </div>
-</div>
     <div class="card rounded mx-auto d-block mt-5">
-  <div class="card-header  bg-dark text-white">
-    Clients
-  </div>
-  <div class="card-body bg-secondary.bg-gradient">
-    <h5 class="card-title">Gérer vos clients en toute facilité</h5>
-    <p class="card-text">Avec notre interface intuitive, vous pourrez organiser votre base de données de clients et maximiser votre productivité en un rien de temps</p>
-    <a href="{% url 'clientsList' %}" class="btn btn-info">Listes des clients</a>
-  </div>
-</div>
-      <div class="card mt-3 rounded mx-auto d-block">
-  <div class="card-header bg-dark text-white">
-    Commandes
-  </div>
-  <div class="card-body bg-secondary.bg-gradient">
-    <h5 class="card-title">Gérer les commandes de votre entreprise</h5>
-    <p class="card-text">Vous pouvez suivre l'état des commandes en temps réel, mettre à jour les informations de livraison et gérer les retours de manière efficace.</p>
-    <a href="{% url 'commandsList' %}" class="btn btn-primary">Listes des commandes</a>
-  </div>
-</div>
+      <div class="card-header bg-dark text-white">Produits</div>
+      <div class="card-body bg-secondary.bg-gradient">
+        <h5 class="card-title">Gérer vos produits en toute facilité</h5>
+        <p class="card-text">
+          Avec notre interface intuitive, vous pourrez organiser votre base de
+          données de produits et maximiser votre productivité en un rien de
+          temps
+        </p>
+        <a href="{% url 'productsList' %}" class="btn btn-info"
+          >Listes des produits</a
+        >
+      </div>
     </div>
+    <div class="card rounded mx-auto d-block mt-5">
+      <div class="card-header bg-dark text-white">Clients</div>
+      <div class="card-body bg-secondary.bg-gradient">
+        <h5 class="card-title">Gérer vos clients en toute facilité</h5>
+        <p class="card-text">
+          Avec notre interface intuitive, vous pourrez organiser votre base de
+          données de clients et maximiser votre productivité en un rien de temps
+        </p>
+        <a href="{% url 'clientsList' %}" class="btn btn-info"
+          >Listes des clients</a
+        >
+      </div>
+    </div>
+    <div class="card mt-3 rounded mx-auto d-block">
+      <div class="card-header bg-dark text-white">Commandes</div>
+      <div class="card-body bg-secondary.bg-gradient">
+        <h5 class="card-title">Gérer les commandes de votre entreprise</h5>
+        <p class="card-text">
+          Vous pouvez suivre l'état des commandes en temps réel, mettre à jour
+          les informations de livraison et gérer les retours de manière
+          efficace.
+        </p>
+        <a href="{% url 'commandsList' %}" class="btn btn-primary"
+          >Listes des commandes</a
+        >
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
