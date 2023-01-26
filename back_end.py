@@ -7,7 +7,7 @@ import datetime
 import flask_excel as excel
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:\Users\ilias\Desktop\Commandify\sqlite-tools-win32-x86-3400100\database.db'
 db = SQLAlchemy(app)
 
 
