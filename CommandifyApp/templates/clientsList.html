@@ -101,80 +101,103 @@
           <td>{{ e.fidelite }}</td>
           <td>
             <button
-    type="button"
-    class="btn btn-primary mb-3"
-    data-toggle="modal"
-    data-target=".bd-example-modal-xl"
-  >
-    Modifier
-  </button>
-
-  <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdrop">
-            Modifier
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            X
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" action="{% url 'modifClient' %}">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="exampleInputNam1">Nom du client</label>
-              <input type="text" class="form-control" id="exampleInputNam1" value="{{ e.nom_client }}" />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputAd1">Adresse</label>
-              <input type="text" class="form-control" id="exampleInputAd1" value="{{ e.add_postale }}" />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmai1">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="exampleInputEmai1"
-                aria-describedby="emailHelp"
-                value="{{ e.add_email }}"
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPhon1">Téléphone</label>
-              <input type="text" class="form-control" id="exampleInputPhon1" value="{{ e.tel }}"/>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputF1">Facebook</label>
-              <input type="text" class="form-control" id="exampleInputF1" value="{{ e.facebook }}"/>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputI1">Instagram</label>
-              <input type="text" class="form-control" id="exampleInputI1" value="{{ e.instagram }}"/>
-            </div>
-            <button type="submit" class="btn btn-primary">
-              Ajouter les modifications
+              type="button"
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target=".bd-example-modal-xl"
+            >
+              Modifier
             </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+
+            <div
+              class="modal fade bd-example-modal-xl"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myExtraLargeModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdrop">Modifier</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'modifClient' %}">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputNam1">Nom du client</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputNam1"
+                          value="{{ e.nom_client }}"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputAd1">Adresse</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputAd1"
+                          value="{{ e.add_postale }}"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmai1">Email</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmai1"
+                          aria-describedby="emailHelp"
+                          value="{{ e.add_email }}"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPhon1">Téléphone</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputPhon1"
+                          value="{{ e.tel }}"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputF1">Facebook</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputF1"
+                          value="{{ e.facebook }}"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputI1">Instagram</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="exampleInputI1"
+                          value="{{ e.instagram }}"
+                        />
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        Ajouter les modifications
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
           <td>
-          <button class="btn btn-primary" action="deleteClient">
+            <button class="btn btn-primary" action="deleteClient">
               Supprimer
             </button>
           </td>

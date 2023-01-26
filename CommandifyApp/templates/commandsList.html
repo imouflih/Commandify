@@ -51,7 +51,7 @@
               <label for="exampleInputFb1">Status (en stock, en rupture)</label>
               <input type="text" class="form-control" id="exampleInputFb1" />
             </div>
-            <input type="submit" value="Ajouter la commande">
+            <input type="submit" value="Ajouter la commande" />
           </form>
         </div>
       </div>
@@ -79,62 +79,70 @@
           <td>{{ e.nom_client }}</td>
           <td>{{ e.Total }}</td>
           <td>{{ e.Status }}</td>
-          <td><button
-    type="button"
-    class="btn btn-primary mb-3"
-    data-toggle="modal"
-    data-target=".bd-example-modal-xl"
-  >
-    Modifier
-  </button>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary mb-3"
+              data-toggle="modal"
+              data-target=".bd-example-modal-xl"
+            >
+              Modifier
+            </button>
 
-  <div
-    class="modal fade bd-example-modal-xl"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myExtraLargeModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdrop">
-            Modifier
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            X
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" action="{% url 'modifCommande' %}">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="exampleInputNam1">Nom du client</label>
-              <input type="text" class="form-control" id="exampleInputNam1" value="{{ e.n_client }}/>
+            <div
+              class="modal fade bd-example-modal-xl"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myExtraLargeModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdrop">Modifier</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'modifCommande' %}">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputNam1">Nom du client</label>
+                        <input type="text" class="form-control"
+                        id="exampleInputNam1" value="{{ e.n_client }}/>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputAd1">Total</label>
+                        <input type="text" class="form-control"
+                        id="exampleInputAd1" value="{{ e.Total }}/>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPhon1"
+                          >Date de la commande</label
+                        >
+                        <input type="text" class="form-control"
+                        id="exampleInputPhon1" value="{{ e.Date_commande }}/>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputF1"
+                          >Status (en stock, en rupture)</label
+                        >
+                        <input type="text" class="form-control"
+                        id="exampleInputF1" value="{{ e.Status }}/>
+                      </div>
+                      <input type="submit" value="Modifier" />
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputAd1">Total</label>
-              <input type="text" class="form-control" id="exampleInputAd1" value="{{ e.Total }}/>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPhon1">Date de la commande</label>
-              <input type="text" class="form-control" id="exampleInputPhon1" value="{{ e.Date_commande }}/>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputF1">Status (en stock, en rupture)</label>
-              <input type="text" class="form-control" id="exampleInputF1" value="{{ e.Status }}/>
-            </div>
-            <input type="submit" value="Modifier">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div></td>
+          </td>
         </tr>
         {% empty %}
         <h3>Il n'y a pas de commandes pour l'instant</h3>
